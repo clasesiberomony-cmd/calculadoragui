@@ -1,4 +1,5 @@
 from PyQt5 import QtWidgets,uic
+from clases.calculadora import Calculadora
 
 class VentanaCalculadora(QtWidgets.QDialog):
     def __init__(self):
@@ -6,11 +7,12 @@ class VentanaCalculadora(QtWidgets.QDialog):
         uic.loadUi("gui/ventana_calculadora.ui",self)
         self.show()
         
-        self.boton_sumar.clicked.connect(self.sumarNumeros)
+        self.boton_sumar.clicked.connect(self.botonSumarClick)
+     
         
-    def sumarNumeros(self):
-        #extraer los datos desde la interfaz
+    def botonSumarClick(self):
         num1 = int(self.edit_numero1.text())
         num2 = int(self.edit_numero2.text())
-        suma = num1 + num2
-        self.label_resultado.setText(str(suma))
+        cal = Calculadora(num1,num2)
+        cal.calcularSuma()
+        self.label_resultado.setText(str(cal.resultado))
